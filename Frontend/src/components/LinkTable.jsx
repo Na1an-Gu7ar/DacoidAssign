@@ -17,7 +17,7 @@ const LinkTable = ({ links }) => (
                     <td className="p-2 break-all">{link.originalUrl}</td>
                     <td>
                         <a
-                            href={`/${link.shortCode}`}
+                            href={`https://url-shortener-api-im11.onrender.com/${link.shortCode}`}
                             className="text-blue-500 underline"
                             target="_blank"
                             rel="noreferrer"
