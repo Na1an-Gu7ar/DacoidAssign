@@ -4,7 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
-const linkRoutes = require('./routes/Link');
+const linkRoutes = require('./routes/link');
 const redirectRoutes = require('./routes/redirect');
 const clicksPerDay = require('./routes/clicksPerDay')
 
