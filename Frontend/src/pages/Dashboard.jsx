@@ -10,6 +10,7 @@ const Dashboard = () => {
   const [links, setLinks] = useState([]);
   const [chartData, setChartData] = useState([]);
   const token = localStorage.getItem('token');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +18,8 @@ const Dashboard = () => {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => setLinks(res.data))
-      .catch(err => console.error('Error loading dashboard:', err));
+      .catch(err => console.error('Error loading dashboard:', err))
+      .finally(() => setLoading(false));
 
     const fetchClicks = async () => {
       try {
@@ -28,17 +30,27 @@ const Dashboard = () => {
         setChartData(res.data);
       } catch (err) {
         console.error('Failed to fetch click data:', err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchClicks();
-  }, []);
+  }, [token]);
 
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/');
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6">
