@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
             const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { email, password });
             dispatch(login(res.data.token));
             alert('Logged in!');
+            navigate('/dashboard');
         } catch (err) {
             alert('Invalid credentials');
         }

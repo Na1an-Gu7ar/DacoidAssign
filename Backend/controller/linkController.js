@@ -1,4 +1,4 @@
-const Link = require('../models/Link');
+const Link = require('../model/Link');
 const { nanoid } = require('nanoid');
 
 exports.createShortLink = async (req, res) => {
@@ -8,7 +8,6 @@ exports.createShortLink = async (req, res) => {
     try {
         const shortCode = customAlias || nanoid(6);
 
-        // Prevent duplicate custom aliases
         const existing = await Link.findOne({ shortCode });
         if (existing) return res.status(400).json({ message: 'Alias already in use' });
 
@@ -22,7 +21,7 @@ exports.createShortLink = async (req, res) => {
         await newLink.save();
 
         res.json({
-            shortUrl: `https://yourdomain.com/${shortCode}`,
+            shortUrl: `http://localhost:3000/${shortCode}`,
             shortCode
         });
     } catch (err) {
