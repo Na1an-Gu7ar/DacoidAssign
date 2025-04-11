@@ -14,7 +14,7 @@ const LinkTable = ({ links }) => (
         <tbody>
             {links.map(link => (
                 <tr key={link._id} className="text-center">
-                    <td className="p-2 break-all">{link.originalUrl}</td>
+                    <td className="p-2 break-all w-2xl overflow-auto">{link.originalUrl}</td>
                     <td>
                         <a
                             href={`https://url-shortener-api-im11.onrender.com/${link.shortCode}`}

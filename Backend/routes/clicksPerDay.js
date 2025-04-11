@@ -36,6 +36,11 @@ router.get('/device-browser-breakdown', async (req, res) => {
     try {
         const results = await Click.aggregate([
             {
+                $addFields: {
+                    browser: { $ifNull: ["$browser", "Device"] }
+                }
+            },
+            {
                 $group: {
                     _id: {
                         device: "$device",
@@ -48,7 +53,9 @@ router.get('/device-browser-breakdown', async (req, res) => {
                 $project: {
                     _id: 0,
                     device: "$_id.device",
-                    browser: "$_id.browser",
+                    browser: {
+                        $ifNull: ["$_id.browser", "Device"]
+                    },
                     count: 1
                 }
             }
