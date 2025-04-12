@@ -56,7 +56,7 @@ const Dashboard = () => {
     <div className="p-6">
       <button
         onClick={handleLogout}
-        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded absolute top-4 right-10"
       >
         Logout
       </button>
@@ -65,11 +65,6 @@ const Dashboard = () => {
       <LinkTable links={links} />
       <ClickChart data={chartData} />
       <DeviceBrowserChart />
-      {/* <ClickChart links={links} />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-        <DevicePie links={links} />
-        <BrowserPie links={links} />
-      </div> */}
     </div>
   );
 };
